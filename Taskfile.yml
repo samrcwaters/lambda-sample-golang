@@ -1,0 +1,15 @@
+version: '3'
+
+vars:
+  IMAGE_NAME: docker-image:test
+  
+tasks:
+  build:
+    cmds:
+      - docker build --platform linux/amd64 -t {{.IMAGE_NAME}} .
+  build-verbose:
+    cmds:
+      - docker build --progress=plain --no-cache --platform linux/amd64 -t {{.IMAGE_NAME}} .
+  start:
+    cmds:
+      - docker run -p 9000:8080 {{.IMAGE_NAME}}
